@@ -1,59 +1,73 @@
-# Comparativo de Performance: Apriori vs. FP-Growth 🛒
+# Performance Comparison: Apriori vs. FP-Growth 🛒
 
-Este repositório contém um estudo prático de Machine Learning focado em **Regras de Associação**. O projeto compara a eficiência do algoritmo clássico **Apriori** contra o moderno **FP-Growth**, utilizando o dataset *Market Basket Optimization*.
+This repository contains a practical Machine Learning study focused on **Association Rules**. The project compares the efficiency of the classic **Apriori** algorithm against the modern **FP-Growth**, using the *Market Basket Optimization* dataset.
 
-## 🚀 Tecnologias Utilizadas
-* **Python 3.12**
-* **Pandas**: Manipulação de dados.
-* **Mlxtend**: Implementação dos algoritmos de associação.
-* **Kagglehub**: Integração direta com datasets do Kaggle.
-* **Matplotlib**: Visualização de resultados.
+---
 
-## 🧠 Contexto e Objetivo
-Este projeto compara dois dos algoritmos mais famosos de mineração de regras de associação: Apriori e FP-Growth. O objetivo foi medir a performance (tempo de execução) e validar a integridade dos resultados (consistência) utilizando um dataset de transações de supermercado
+## 🚀 Technologies
 
+- **Python 3.12**
+- **Pandas** — data manipulation
+- **Mlxtend** — association algorithm implementations
+- **Kagglehub** — direct Kaggle dataset integration
+- **Matplotlib** — result visualization
 
-## 🛠️ Desafios e Aprendizados
+---
 
-Durante o desenvolvimento, foram resolvidos problemas críticos de engenharia de dados:
+## 🧠 Context & Objective
 
-|Dificuldade|Solução Aplicada|
-|-----------|----------------|
-|Ambiente Virtual|Erro de diretório ao tentar ativar o `.venv.` Resolvido com a criação correta do ambiente via `python -m venv` e uso de caminhos relativos.|
-|Caminhos Dinâmicos|O `kagglehub` baixa arquivos em pastas com hashes aleatórios. Foi implementada uma varredura de diretório com `os.listdir()` para encontrar o CSV automaticamente.|
-|Dados "Sujos"|Itens vindo como strings únicas separadas por vírgula em vez de listas. Utilizado `.split(",")` e `.strip()` para separar e limpar os nomes dos produtos.|
-|Regras Inexistentes|Suporte muito alto (5%) resultava em DataFrames vazios. Aplicado ajuste fino do ``min_support`` para 0.5% e 0.1%, permitindo capturar associações em datasets esparsos.|
-|Erro de Consistência|Algoritmos retornavam os mesmos itens, mas em ordens diferentes. Implementada a normalização dos itemsets (conversão de frozensets para listas ordenadas e strings) antes da comparação.|
-|Erro de Hash (Categorical)|Erro ao tentar ordenar listas no Pandas (``unhashable type: 'list'``). Criada uma ``itemset_key`` (string) para permitir a ordenação e comparação segura dos DataFrames.|
+This project compares two of the most well-known association rule mining algorithms: Apriori and FP-Growth. The goal was to measure execution performance (runtime) and validate result integrity (consistency) using a supermarket transaction dataset.
 
-## 📊 Resultados Obtidos
+---
 
-Nos testes realizados, o **FP-Growth** demonstrou uma superioridade clara:
-* **Apriori**: ~0.0358s
-* **FP-Growth**: ~0.0041s
-* **Veredito**: O FP-Growth foi aproximadamente **9x mais rápido**, mantendo a integridade total dos resultados (Consistência: OK).
+## 🛠️ Challenges & Lessons Learned
 
+Several critical data engineering problems were solved during development:
 
+| Challenge | Solution Applied |
+|-----------|-----------------|
+| Virtual Environment | Directory error when activating `.venv`. Fixed by correctly creating the environment via `python -m venv` and using relative paths. |
+| Dynamic Paths | `kagglehub` downloads files into folders with random hashes. Implemented a directory scan with `os.listdir()` to automatically locate the CSV. |
+| Dirty Data | Items arriving as single comma-separated strings instead of lists. Used `.split(",")` and `.strip()` to separate and clean product names. |
+| Empty Rules | High support (5%) resulted in empty DataFrames. Fine-tuned `min_support` to 0.5% and 0.1% to capture associations in sparse datasets. |
+| Consistency Error | Algorithms returned the same items in different orders. Implemented itemset normalization (converting frozensets to sorted lists and strings) before comparison. |
+| Hash Error (Categorical) | Error when sorting lists in Pandas (`unhashable type: 'list'`). Created an `itemset_key` (string) to enable safe sorting and DataFrame comparison. |
 
-## 📋 Como Executar
+---
 
-1. Clone o repositório:
+## 📊 Results
+
+In the tests performed, **FP-Growth** showed clear superiority:
+
+| Algorithm | Runtime |
+|-----------|---------|
+| Apriori | ~0.0358s |
+| FP-Growth | ~0.0041s |
+
+**Verdict:** FP-Growth was approximately **9x faster**, while maintaining full result integrity (Consistency: OK).
+
+---
+
+## 📋 How to Run
+
+1. Clone the repository:
    ```bash
-   git clone [https://github.com/seu-usuario/associacao-apriori-fpgrowth](https://github.com/seu-usuario/associacao-apriori-fpgrowth)
+   git clone https://github.com/your-username/apriori-vs-fpgrowth
    ```
 
-2. Crie o ambiente virtual
-    ```bash
+2. Create and activate the virtual environment:
+   ```bash
    python3 -m venv .venv
-   source .venv/bin/activate
+   source .venv/bin/activate      # Linux/Mac
+   .venv\Scripts\activate         # Windows
    ```
 
-3. Instale as dependências:
-    ```bash
-    pip install -r requirements.txt
-    ```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-4. Rode o script principal:
-    ```bash
-    python3 main.py
-    ```
+4. Run the main script:
+   ```bash
+   python3 main.py
+   ```
